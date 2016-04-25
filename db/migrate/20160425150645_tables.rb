@@ -1,6 +1,6 @@
 class Tables < ActiveRecord::Migration
 	def change
-		create_tables :users do |t|
+		create_table :users do |t|
 			t.string :email
 			t.string :username
 			t.string :encrypted_password
@@ -8,7 +8,7 @@ class Tables < ActiveRecord::Migration
 			t.datetime :updated_at
 		end
 
-		create_tables :answers do |a|
+		create_table :answers do |a|
 			a.integer :question_id
 			a.integer :user_id
 			a.string :answer_content
@@ -16,7 +16,7 @@ class Tables < ActiveRecord::Migration
 			a.datetime :updated_at
 		end
 
-		create_tables :questions do |q|
+		create_table :questions do |q|
 			q.integer :user_id
 			q.string :question_title
 			q.string :question_desc
