@@ -1,11 +1,10 @@
 require 'byebug'
 
 get '/' do
-
   if logged_in?
     redirect "/dashboard"
   else
-  erb :"static/index"
+  erb :"static/login"
   end
 end
 
