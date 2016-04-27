@@ -1,0 +1,16 @@
+<h2>Question: <%=@user_question_show.question_title%></h2>
+
+<p>Question Description: <%=@user_question_show.question_desc%></p>
+<br>
+
+<article>
+  <% @answers.each do |x| %>
+  <% @username_for_answer = User.find(x.user_id)%>
+  <h5><%=@username_for_answer.username%></h5>
+  <p><%=x.answer_content%></p>
+  <% end %>
+</article>
+
+<form method=get action="/questions/<%=params[:question_id]%>/answers/new">
+  <input type=submit value='Answer!'>
+</form>

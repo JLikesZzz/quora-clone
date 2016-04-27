@@ -1,5 +1,19 @@
 <h1>Quoral</h1>
 <h3>Questions for Answers</h3>
-
-<p>This is the profile</p>
+<!-- <% current_user %> -->
+<p>This is <%=@user_profile.username %> profile</p>
 <p> It should allow users to see the anaswers and questions </p>
+
+
+<p>My Questions</p>
+<p>My Answers</p>
+
+<form method=post action=/questions>
+    <input type=text placeholder="Question Title" name="user[question_title]"><br>
+    <input type=text placeholder="Question Description" name ="user[question_desc]"><br>
+    <input type=submit value='Submit'><br>
+</form>
+
+<form method=post action=/logout>
+		<input type=submit value="Logout">
+</form>

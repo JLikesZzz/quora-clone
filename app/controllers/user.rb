@@ -17,7 +17,7 @@ post '/signup' do
   @user.password = params[:user][:password]
   if @user.save
     log_in(@user)
-    redirect to '/profile'
+    redirect to "/profile/#{@user.id}"
   else
     @error_message =  "Invalid email or password"
     redirect '/'

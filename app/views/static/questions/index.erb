@@ -1,0 +1,20 @@
+<h1>List of questions</h1>
+<table style='border: solid'>
+<tr>
+  <th>Question Title</th>
+  <th>Question Description</th>
+  <th>Created At</th>
+  <th>Created By</th>
+</tr>
+<% if @question %>
+<% @question.each do |x| %>
+<% question_id = "/questions/#{x.id}" %>
+<tr>
+  <td><a href=<%= question_id %>><%=x.question_title%></a></td>
+  <td><%=x.question_desc%></td>
+  <td><%=x.created_at%></td>
+  <td><%=x.user.username%></td>
+</tr>
+<% end %>
+<% end %>
+</table>

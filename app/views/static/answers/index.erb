@@ -1,0 +1,19 @@
+<h1>List of questions</h1>
+<table style='border: solid'>
+<tr>
+  <th>Answer</th>
+  <th>Created At</th>
+  <th>Answered By</th>
+  <th>Question</th>
+</tr>
+<% if @answers %>
+<% @answers.each do |x| %>
+<tr>
+  <td><%=x.answer_content%></td>
+  <td><%=x.created_at%></td>
+  <td><%=x.user.username%></td>
+  <td><%=x.question_id%></td>
+</tr>
+<% end %>
+<% end %>
+</table>

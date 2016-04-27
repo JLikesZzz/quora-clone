@@ -1,10 +1,18 @@
 require 'byebug'
 
 class User < ActiveRecord::Base
+
 	attr_accessor :password
 	validates :email, :format => {:with =>/\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/}
 	# validates :encrypted_password, :format => {:with =>/\S{8,}/}
-	validates :email, uniqueness: true
+	validates :email, uniqueness: true, presence: true
+	validates :username, uniqueness: true
+
+	has_many :answers
+	has_many :questions
+
+
+
 	include BCrypt
 
 	# def password
