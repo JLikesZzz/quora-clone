@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 	validates :email, :format => {:with =>/\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/}
 	# validates :encrypted_password, :format => {:with =>/\S{8,}/}
 	validates :email, uniqueness: true, presence: true
-	validates :username, uniqueness: true
+	validates :username, uniqueness: true, presence: true
 
 	has_many :answers
 	has_many :questions

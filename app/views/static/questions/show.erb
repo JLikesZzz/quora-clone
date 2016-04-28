@@ -1,16 +1,90 @@
-<h2>Question: <%=@user_question_show.question_title%></h2>
 
-<p>Question Description: <%=@user_question_show.question_desc%></p>
-<br>
+<div class='headerinner' id='headerquestion'>
+	<div class='headercontent'>
+		<div class='table_cell_wrapper'>
+      <div class='icon_bar'>
+				<a href="http://localhost:9393/">
+          <img src="/img/jiu.gif" alt="Coral Icon" style="width: 30px; height: 30px; margin-left: -70; margin-bottom:-80; margin-top: 20;">
+        </a>
+		  </div>
+      <div class='ask_bar'>
+	       <form method=post action=/questions >
+	          <input type=text placeholder="Question Title" name="user[question_title]">
+	    <!-- <input type=text placeholder="Question Description" name ="user[question_desc]"><br> -->
+	          <input type=submit value='Submit' id='headerlogout'><br>
+	       </form>
+      </div>
+      <div class='current_username'>
+	       <%current_user%>
+        <form method=post action="/profile/<%=current_user.id%>">
+	        <input type=submit value="<%=current_user.username%>">
+        </form>
+      </div>
+
+      <div class='logout'>
+        <form method=post action=/logout >
+		        <input type=submit value="Logout">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav>
+	This is everything at the side
+</nav>
+
+<section>
+
+  <h2>Question: <%=@user_question_show.question_title%></h2>
+  <p>Question Description: <%=@user_question_show.question_desc%></p>
+
+  <% user_name_id = @user_question_show.user_id %>
+  <%@user_name = User.find(user_name_id)%>
+
+  <p>Asked by: <%=@user_name.username%> </p>
+  <br>
+
+  <%if current_user.id == user_name_id%>
+
+    <% @edit_url = "/questions/#{params[:question_id]}/edit" %>
+    <form method=post action=<%= @edit_url %>>
+      <input type=text name="question_title" value="<%=@user_question_show.question_title%>"><br>
+      <input type=text name ="question_desc" value="<%=@user_question_show.question_desc%>"><br>
+      <input type=submit value='Submit'><br>
+    </form>
+
+    <br>
+
+    <% @delete_url = "/questions/#{params[:question_id]}" %>
+    <form method="post" action=<%= @delete_url%>>
+      <!-- <div style="margin:0;padding:0"> -->
+      <input name="_method" type="hidden" value="delete" />
+      <input type=submit value='Delete'>
+  <!-- </div> -->
+    </form>
+  <% end %>
+
 
 <article>
   <% @answers.each do |x| %>
   <% @username_for_answer = User.find(x.user_id)%>
-  <h5><%=@username_for_answer.username%></h5>
+  <% user_id = "/profile/#{x.user_id}" %>
+  <h5><a href=<%= user_id %>><%=@username_for_answer.username%></a></h5>
   <p><%=x.answer_content%></p>
+
+  <% if current_user.id == x.user_id %>
+  <form>
+  </form>
+
+  <% end %>
+
   <% end %>
 </article>
+
+
 
 <form method=get action="/questions/<%=params[:question_id]%>/answers/new">
   <input type=submit value='Answer!'>
 </form>
+</section>

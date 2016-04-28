@@ -1,25 +1,50 @@
-<!-- <div class='logged in header'>
-</div> -->
+<div class='headerinner' id='headerquestion'>
+	<div class='headercontent'>
+		<div class='table_cell_wrapper'>
 
-<h1>Welcome to DogeRa</h1>
+			<div class='icon_bar'>
+				<a href="http://localhost:9393/">
+					<img src="/img/jiu.gif" alt="Coral Icon" style="width: 30px; height: 30px; margin-left: -70; margin-bottom:-80; margin-top: 20;">
+				</a>
+			</div>
 
-<p>This is the dashboard</p>
-<p>This is where the homepage if log in</p>
+			<div class='ask_bar'>
+				<form method=post action=/questions >
+	    		<input type=text placeholder="Question Title" name="user[question_title]">
+	    <!-- <input type=text placeholder="Question Description" name ="user[question_desc]"><br> -->
+	    		<input type=submit value='Submit' id='headerlogout'><br>
+				</form>
+			</div>
 
-<article>
+			<div class='current_username'>
+				<%current_user%>
+				<form method=post action="/profile/<%=current_user.id%>">
+					<input type=submit value="<%=current_user.username%>">
+				</form>
+			</div>
+
+			<div class='logout'>
+				<form method=post action=/logout >
+				<input type=submit value="Logout">
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<nav>
+	This is everything at the side
+</nav>
+
+<section>
 	<% @list_question.each do |x| %>
-	<% question_id = "/questions/#{x.id}" %>
-	<h4><a href=<%= question_id %>><%=x.question_title%></a></h4>
-	<p><%=x.question_desc%></p>
+		<% question_id = "/questions/#{x.id}" %>
+		<% user_who_answer = User.find(x.user_id) %>
+		<h4><a href=<%= question_id %>><%=x.question_title%></a></h4>
+		<p><%=x.question_desc%></p>
+		<%username_profile_link = "/profile/#{user_who_answer.id}"%>
+		<p>Question by: <a href=<%= username_profile_link%>><%=user_who_answer.username%></a>
+		<hr>
 	<% end %>
-</article>
-
-<form method=post action=/questions>
-    <input type=text placeholder="Question Title" name="user[question_title]"><br>
-    <input type=text placeholder="Question Description" name ="user[question_desc]"><br>
-    <input type=submit value='Submit'><br>
-</form>
-
-<form method=post action=/logout>
-		<input type=submit value="Logout">
-</form>
+</section>

@@ -1,19 +1,72 @@
-<h1>Quoral</h1>
-<h3>Questions for Answers</h3>
-<!-- <% current_user %> -->
-<p>This is <%=@user_profile.username %> profile</p>
-<p> It should allow users to see the anaswers and questions </p>
+<div class='headerinner' id='headerquestion'>
+	<div class='headercontent'>
+		<div class='table_cell_wrapper'>
+      <div class='icon_bar'>
+				<a href="http://localhost:9393/">
+          <img src="/img/jiu.gif" alt="Coral Icon" style="width: 30px; height: 30px; margin-left: -70; margin-bottom:-80; margin-top: 20;">
+        </a>
+		  </div>
+			<div class='ask_bar'>
+	       <form method=post action=/questions >
+	          <input type=text placeholder="Question Title" name="user[question_title]">
+	    <!-- <input type=text placeholder="Question Description" name ="user[question_desc]"><br> -->
+	          <input type=submit value='Submit' id='headerlogout'><br>
+	       </form>
+      </div>
+      <div class='current_username'>
+	       <%current_user%>
+         <form method=post action="/profile/<%=current_user.id%>">
+	          <input type=submit value="<%=current_user.username%>">
+         </form>
+      </div>
+      <div class='logout'>
+        <form method=post action=/logout >
+		        <input type=submit value="Logout">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-<p>My Questions</p>
-<p>My Answers</p>
 
-<form method=post action=/questions>
-    <input type=text placeholder="Question Title" name="user[question_title]"><br>
-    <input type=text placeholder="Question Description" name ="user[question_desc]"><br>
-    <input type=submit value='Submit'><br>
-</form>
 
-<form method=post action=/logout>
-		<input type=submit value="Logout">
-</form>
+<section>
+  <p><%=@user_profile.username %></p>
+  <br>
+  <br>
+  <br>
+  <hr>
+  <p>My Questions<p/>
+
+  <% question_user_id = @user_profile.id%>
+  <% question_list = Question.all %>
+  <% @question_current_profile_user = question_list.where(user_id: question_user_id) %>
+
+  <% if @question_current_profile_user %>
+    <% @question_current_profile_user.each do |x| %>
+    <% link_to_question_page = "/questions/#{x.id}" %>
+      <h4><a href=<%= link_to_question_page %>><%=x.question_title%></a></h4>
+      <p><%=x.question_desc%></p>
+      <p><%=x.created_at%></p>
+      <p><%=x.user.username%></p>
+    <% end %>
+  <% end %>
+
+  <br>
+  <hr>
+
+  <p>My Answers<p/>
+  <% answer_list = Answer.all %>
+  <% @answer_current_profile_user = answer_list.where(user_id: question_user_id) %>
+
+  <% if @answer_current_profile_user %>
+    <% @answer_current_profile_user.each do |x| %>
+      <% link_to_answer_question_page = "/questions/#{x.question_id}"%>
+      <% answer_question_id = Question.find(x.question_id)%>
+      <h4><a href=<%= link_to_answer_question_page %>><%= answer_question_id.question_title %></a> </h4>
+      <p><%=x.answer_content%></p>
+      <p><%=x.created_at%></p>
+    <% end %>
+  <% end %>
+</section>
