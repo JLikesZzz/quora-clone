@@ -7,7 +7,7 @@
         </a>
 		  </div>
 			<div class='ask_bar'>
-	       <form method=post action=/questions >
+	       <form method=post action=/questions id='question_bar'>
 	          <input type=text placeholder="Question Title" name="user[question_title]">
 	    <!-- <input type=text placeholder="Question Description" name ="user[question_desc]"><br> -->
 	          <input type=submit value='Submit' id='headerlogout'><br>
@@ -27,9 +27,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 <section>
   <p><%=@user_profile.username %></p>

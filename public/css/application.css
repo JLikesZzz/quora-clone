@@ -8,17 +8,22 @@ border-top: 2px solid #b92b27;
 }
 
 #headerquestion {
-background-color: orange;
-position: fixed;
-width: 100%;
-margin-top: -10;
-height: 62;
+  background-image: url(/img/old-burned-vintage-paper-texture-hd.png);
+  background-position: 144px -225px;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 60;
+  border-bottom: solid;
+  border-width: thin;
+  border-bottom-style: inset;
+  border-color: lightslategrey;
 }
 
 .current_username {
     position: fixed;
-    margin-left: 530;
-    margin-top: -30;
+    margin-left: 70%;
+    margin-top: -44;
 }
 
 div.headercontent{
@@ -38,20 +43,29 @@ div.ask_bar{
     box-sizing: border-box;
     width: 100%;
     padding: 10px 0 11px 14px;
-    margin-top: 15;
+    margin-top: 10;
+    margin-left: 21%;
 margin-bottom: -15;
 }
 
-div.logout{
-  position: relative;
-  float: left;
-      margin-top: -30;
-  margin-bottom: 1;
-    margin-left: 600;
+div.logout {
+    position: relative;
+    float: left;
+    margin-top: -44;
+    margin-bottom: 1;
+    margin-left: 82%;
 }
 
-input[type="text"] {
-    width: 250;
+input#input_at_header{
+  width: 350;
+  height: 32;
+  padding-left: 10;
+  border-bottom-left-radius: 6px;
+  position: relative;
+  border-style: solid;
+  border-width: thin;
+  border-color: grey;
+  font-family: 'Special Elite', cursive;
 }
 
 
@@ -60,21 +74,132 @@ form#headerlogout {
 }
 
 section {
-  width: 350px;
-    float: left;
-    padding: 10px;
-    position: initial;
-    margin-left: 120;
-    margin-top: 70;
+  width: 500px;
+float: left;
+padding: 10px;
+position: initial;
+margin-left: 31%;
+margin-top: 72px;
 }
 
 nav {
-  line-height: 30px;
-background-color: #eeeeee;
-height: 650px;
-width: 100px;
-float: left;
-margin-top: 52;
-padding: 5px;
-position:fixed;
+      line-height: 30px;
+      background-color: white;
+      height: 650px;
+      width: 200px;
+      float: left;
+      margin-top: 63;
+      padding: 5px;
+      margin-left: 11%;
+      position: fixed;
 }
+
+form#delete_confirmation{
+}
+
+hr {
+    border-top-width: 0;
+    border-left-width: 0;
+    border-bottom-color: lightgrey;
+}
+
+hr#trending_side{
+  margin-top: 0;
+}
+
+div#sidebartrending {
+    margin-top: -28;
+    color: grey;
+}
+
+form#question_bar {
+    width: 500;
+    margin-top: -6;
+}
+
+input#question_submit_button {
+  width: 100;
+color: black;
+font-family: monospace;
+position: absolute;
+height: 32;
+border-style: ridge;
+border-width: thin;
+border-color: grey;
+background-color: transparent;
+font-family: 'Special Elite', cursive;
+}
+
+input#current_username_button {
+    border: none;
+    height: 32;
+    width: 100;
+}
+
+form#username_bar {
+    margin-top: 12;
+}
+
+input#headerlogout {
+    border: none;
+    height: 32;
+    width: 100;
+    margin-top: 12;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    padding: 18.5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+    font-family: bakery;
+}
+
+.button_row_bar {
+    margin-left: 67%;
+    position: relative;
+    margin-top: -89;
+}
+
+.button:hover {
+    /*color: #fff;*/
+	  text-shadow: 0px -1px 4px white, 0px -2px 10px yellow, 0px -10px 20px #ff8000, 0px -18px 40px red;
+    /*-o-transition:0.2s ease-out, 2s ease-in;
+    -ms-transition:0.2s ease-out, 2s ease-in;
+    -moz-transition:0.2s ease-out, 2s ease-in;
+    -webkit-transition:0.2s ease-out, 2s ease-in;
+
+    transition:0.5s;*/
+}
+
+input#question_submit_button:hover {
+  background-color: black ;
+  color: white;
+}
+
+h2{
+  font-size: 16;
+}
+
+h2#trending_font_size {
+    margin-top: 19;
+    margin-bottom: 8;
+}
+
+a{
+  text-decoration: none;
+}
+
+a.one:link {color:grey;}
+a.one:visited {color:grey;}
+a.one:hover {color:steelblue;}
+
+a.two:link {color:black;}
+a.two:visited {color:black;}
+a.two:hover {text-decoration:underline;}

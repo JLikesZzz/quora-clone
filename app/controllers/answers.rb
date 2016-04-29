@@ -32,11 +32,11 @@ get '/answers/:answer_id/edit' do
   #return an HTML form for editing a answer
 end
 
-post '/answers/:answer_id' do
+put '/answers/:answer_id' do
   @user_answer_edit = Answer.find(params[:answer_id])
   @user_answer_edit.answer_content = params[:answer_content]
   if @user_answer_edit.save
-    redirect "/answers/#{@user_answer_edit.id}"
+    redirect "/questions/#{@user_answer_edit.question_id}"
   else
     @error_message = true
   end
@@ -47,8 +47,9 @@ end
 
 delete '/answers/:answer_id' do
   @answer_delete = Answer.find(params[:answer_id])
+  back_to_question_using_id = @answer_delete.question_id
   @answer_delete.destroy
   # erb :'static/answers/destroy'
   #delete a specific answer
-  redirect '/answers'
+  redirect "/questions/#{back_to_question_using_id}"
 end

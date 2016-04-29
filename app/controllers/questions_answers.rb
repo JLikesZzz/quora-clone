@@ -6,7 +6,6 @@ get '/questions/:question_id/answers/new' do
 end
 
 post '/questions/:question_id/answers' do
-
   question_link = params[:question_id]
   new_answer =  current_user.answers.build(params[:user])
   new_answer.question_id = question_link

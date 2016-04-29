@@ -2,49 +2,79 @@
 	<div class='headercontent'>
 		<div class='table_cell_wrapper'>
 
-			<div class='icon_bar'>
+			<div class='icon_bar' style="margin-left: 5%;" >
 				<a href="http://localhost:9393/">
-					<img src="/img/jiu.gif" alt="Coral Icon" style="width: 30px; height: 30px; margin-left: -70; margin-bottom:-80; margin-top: 20;">
+					<img src="/img/jiu.gif" alt="caligraphy" style="width: 30px; height: 30px; margin-bottom:-80; margin-top: 15;">
 				</a>
 			</div>
 
 			<div class='ask_bar'>
-				<form method=post action=/questions >
-	    		<input type=text placeholder="Question Title" name="user[question_title]">
-	    <!-- <input type=text placeholder="Question Description" name ="user[question_desc]"><br> -->
-	    		<input type=submit value='Submit' id='headerlogout'><br>
+				<form method=post action=/questions id='question_bar'>
+	    		<input type=text placeholder="Question Title" name="user[question_title]" id='input_at_header'>
+	    		<input type=submit value='Submit' id='question_submit_button'>
 				</form>
 			</div>
 
-			<div class='current_username'>
+			<!-- <div class='current_username'> -->
+			<div class='button_row_bar'>
+
+			<button class="button" onclick="location.href='/profile/<%=current_user.id%>';">
+					<%=current_user.username%>
+			</button>
+
+			<form method=post action=/logout id='logoutform'></form>
+			<button class='button' type="submit" form="logoutform" value="Logout">
+				Logout
+			</button>
+			<!-- <button class="button" href="/profile/<%=current_user.id%>">
 				<%current_user%>
-				<form method=post action="/profile/<%=current_user.id%>">
-					<input type=submit value="<%=current_user.username%>">
+				<%=current_user.username%>
+				<form method=post action="/profile/<%=current_user.id%>" id='username_bar'>
+					<input type=submit value="<%=current_user.username%>" id='current_username_button'>
 				</form>
-			</div>
+			</button> -->
+			<!-- </div> -->
 
-			<div class='logout'>
+			<!-- <div class='logout'> -->
+			<!-- <button class="button">
 				<form method=post action=/logout >
-				<input type=submit value="Logout">
+				<input type=submit value="Logout" id='headerlogout'>
 				</form>
-			</div>
+			</button> -->
+			<!-- </div> -->
+		</div>
 
 		</div>
 	</div>
 </div>
 
 <nav>
-	This is everything at the side
+	<br>
+	<div id="sidebartrending">
+	<h2 id='trending_font_size'><b>
+		<img src="https://qsf.is.quoracdn.net/-images.icons.trending_purple.svg894fb8666fba57fb.svg" style='width: 10px';>
+		Trending
+	</b>
+	</h2>
+	<hr id='trending_side'>
+	<% @list_question.sample(3).each do |y| %>
+	<a class="one" href="/questions/y.id" style="text-decoration: blink;"><%= y.question_title %></a>
+	<br>
+	<br>
+	<% end %>
+	</div>
 </nav>
 
 <section>
+	<h2><b>Top Stories For You</b></h2>
+	<hr>
 	<% @list_question.each do |x| %>
 		<% question_id = "/questions/#{x.id}" %>
 		<% user_who_answer = User.find(x.user_id) %>
-		<h4><a href=<%= question_id %>><%=x.question_title%></a></h4>
+		<h1><a class="two" target="_blank" href=<%= question_id %> ><%=x.question_title%></a></h1>
 		<p><%=x.question_desc%></p>
 		<%username_profile_link = "/profile/#{user_who_answer.id}"%>
-		<p>Question by: <a href=<%= username_profile_link%>><%=user_who_answer.username%></a>
+		<p>Question by: <a class="two" href=<%= username_profile_link%>><%=user_who_answer.username%></a>
 		<hr>
 	<% end %>
 </section>

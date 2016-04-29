@@ -1,33 +1,35 @@
-
 <div class='headerinner' id='headerquestion'>
 	<div class='headercontent'>
 		<div class='table_cell_wrapper'>
-      <div class='icon_bar'>
-				<a href="http://localhost:9393/">
-          <img src="/img/jiu.gif" alt="Coral Icon" style="width: 30px; height: 30px; margin-left: -70; margin-bottom:-80; margin-top: 20;">
-        </a>
-		  </div>
-      <div class='ask_bar'>
-	       <form method=post action=/questions >
-	          <input type=text placeholder="Question Title" name="user[question_title]">
-	    <!-- <input type=text placeholder="Question Description" name ="user[question_desc]"><br> -->
-	          <input type=submit value='Submit' id='headerlogout'><br>
-	       </form>
-      </div>
-      <div class='current_username'>
-	       <%current_user%>
-        <form method=post action="/profile/<%=current_user.id%>">
-	        <input type=submit value="<%=current_user.username%>">
-        </form>
-      </div>
 
-      <div class='logout'>
-        <form method=post action=/logout >
-		        <input type=submit value="Logout">
-        </form>
-      </div>
-    </div>
-  </div>
+			<div class='icon_bar' style="margin-left: 5%;" >
+				<a href="http://localhost:9393/">
+					<img src="/img/jiu.gif" alt="caligraphy" style="width: 30px; height: 30px; margin-bottom:-80; margin-top: 15;">
+				</a>
+			</div>
+
+			<div class='ask_bar'>
+				<form method=post action=/questions id='question_bar'>
+	    		<input type=text placeholder="Question Title" name="user[question_title]" id='input_at_header'>
+	    		<input type=submit value='Submit' id='question_submit_button'>
+				</form>
+			</div>
+
+			<!-- <div class='current_username'> -->
+			<div class='button_row_bar'>
+
+			<button class="button" onclick="location.href='/profile/<%=current_user.id%>';">
+					<%=current_user.username%>
+			</button>
+
+			<form method=post action=/logout id='logoutform'></form>
+			<button class='button' type="submit" form="logoutform" value="Logout">
+				Logout
+			</button>
+		</div>
+
+		</div>
+	</div>
 </div>
 
 <nav>
@@ -65,26 +67,39 @@
     </form>
   <% end %>
 
+<hr>
 
 <article>
-  <% @answers.each do |x| %>
+	<p><%=@answers_list.count %> Answers</p>
+  <% @answers_list.each do |x| %>
   <% @username_for_answer = User.find(x.user_id)%>
   <% user_id = "/profile/#{x.user_id}" %>
+
   <h5><a href=<%= user_id %>><%=@username_for_answer.username%></a></h5>
   <p><%=x.answer_content%></p>
 
   <% if current_user.id == x.user_id %>
-  <form>
+  <form method=post action=/answers/<%= x.id %>>
+      <input name="_method" type="hidden" value="put" />
+      <input type=text name="answer_content" value="<%=x.answer_content%>">
+      <input type=submit value='Edit'><br>
   </form>
 
+    <form id=delete_confirmation method=post action=/answers/<%= x.id %>>
+        <input name="_method" type="hidden" value="delete" />
+        <input type=submit value='Delete'><br>
+    </form>
   <% end %>
 
   <% end %>
 </article>
 
 
+<form method=post action="/questions/<%=@user_question_show.id%>/answers">
+  <p>Answer here</p>
+    <input type=text placeholder="Answer Content" name="user[answer_content]"><br>
 
-<form method=get action="/questions/<%=params[:question_id]%>/answers/new">
-  <input type=submit value='Answer!'>
+    <input type=submit value='Answer!'><br>
 </form>
+
 </section>

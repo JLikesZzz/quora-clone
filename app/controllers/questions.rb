@@ -24,7 +24,8 @@ end
 get '/questions/:question_id' do
   # access_question(params[:question_id])
   @user_question_show = Question.find(params[:question_id])
-  @answers = Answer.where(question_id: params[:question_id])
+  # @answers_list = Answer.where(question_id: params[:question_id])
+  @answers_list = @user_question_show.answers
   # byebug
   erb :'static/questions/show'
   #display a specific question
