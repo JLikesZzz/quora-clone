@@ -1,5 +1,3 @@
-require 'byebug'
-
 class User < ActiveRecord::Base
 
 	attr_accessor :password
@@ -8,9 +6,12 @@ class User < ActiveRecord::Base
 	validates :email, uniqueness: true, presence: true
 	validates :username, uniqueness: true, presence: true
 
-	has_many :answers
-	has_many :questions
-
+	has_many :answers, dependent: :destroy
+	has_many :questions, dependent: :destroy
+	has_many :question_votes, dependent: :destroy
+	has_many :question_comments, dependent: :destroy
+	has_many :answer_votes, dependent: :destroy
+	has_many :answer_comments, dependent: :destroy
 
 
 	include BCrypt
